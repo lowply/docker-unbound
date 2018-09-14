@@ -1,0 +1,19 @@
+version: '3'
+services:
+  unbound:
+    build: .
+    image: lowply/docker-unbound
+    container_name: unbound
+    volumes:
+      - ./conf:/etc/unbound
+      - ./log:/var/log
+    ports:
+      - "65353:53"
+      - "65353:53/udp"
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.111.0/24
+
